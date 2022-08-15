@@ -1,6 +1,6 @@
 <template>
   <div class="home text-center">
-    <h2>{{ appTitle }}</h2>
+    <h2 ref="appTitleRef">{{ appTitle }}</h2>
     <h3 class="mb-4">{{ counterData.title }}:</h3>
     <div class="text-5xl flex items-center justify-center space-x-10 mb-2">
       <button
@@ -43,10 +43,20 @@
 </template>
 
 <script setup>
-import { computed, onBeforeMount, onMounted, reactive, watch } from "vue";
+import {
+  computed,
+  nextTick,
+  onBeforeMount,
+  onMounted,
+  reactive,
+  ref,
+  watch,
+} from "vue";
 import { vAutofocus } from "@/directives/vAutofocus";
 
 const appTitle = "My Amazing Counter App";
+
+const appTitleRef = ref(null);
 
 onBeforeMount(() => {
   console.log("before mount");
@@ -68,8 +78,10 @@ const oddOrEven = computed(() => {
   return counterData.count % 2 === 0 ? "even" : "odd";
 });
 
-const increaseCounter = (amount) => {
+const increaseCounter = async (amount) => {
   counterData.count += amount;
+  await nextTick();
+  console.log("nextTick");
 };
 
 const decreaseCounter = (amount) => {
@@ -77,6 +89,6 @@ const decreaseCounter = (amount) => {
 };
 
 onMounted(() => {
-  console.log("mounted");
+  console.log(`The app title is: ${appTitleRef.value.offsetWidth} px wide`);
 });
 </script>

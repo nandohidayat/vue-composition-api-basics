@@ -15,6 +15,12 @@ import { RouterLink, RouterView } from "vue-router";
       to="/posts"
       >Posts
     </RouterLink>
+    <div class="border-l border-gray-700 h-7"></div>
+    <RouterLink
+      class="py-2 px-4 bg-gray-700 text-gray-400 rounded text-sm hover:bg-gray-600 hover:text-gray-200"
+      to="/modals"
+      >Modals
+    </RouterLink>
   </nav>
 
   <RouterView />
